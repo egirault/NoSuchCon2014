@@ -1,0 +1,48 @@
+##################################
+# A few handy functions
+##################################
+
+def print_context_pc
+    printf "regs.pc = 0x%08x\n", *(int*)($fp-0x1cc)
+end
+
+def print_param
+    printf "param = 0x%08x\n", *(int*)($fp-0x2f0)
+end
+
+def print_addr
+    printf "addr = 0x%08x\n", *(int*)($fp-0x2fc)
+end
+
+def print_counter
+    printf "counter = %d\n", *(int*)($fp-0x300)
+end
+
+##################################
+
+set pagination off
+set confirm off
+file crackmips
+target remote 127.0.0.1:4444
+
+# break in the end of block 1
+b *0x401440
+commands
+silent
+printf "\nNew round\n"
+print_counter
+print_context_pc
+print_param 
+print_addr
+c
+end
+
+# break in the end of block 2
+b *0x0401D8C
+commands
+silent
+print_context_pc
+c
+end
+
+c

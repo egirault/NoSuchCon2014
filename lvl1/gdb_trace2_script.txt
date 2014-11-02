@@ -1,0 +1,20 @@
+
+def print_context_pc
+    printf "0x%08x\n", *(int*)($fp-0x1cc)
+end
+
+set pagination off
+set confirm off
+file crackmips
+target remote 127.0.0.1:4444
+
+# break in the end of block 2
+b *0x0401D8C
+commands
+silent
+print_context_pc
+c
+end
+
+c
+
