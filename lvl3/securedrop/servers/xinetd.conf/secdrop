@@ -1,0 +1,17 @@
+# default: off
+# description: An xinetd internal service which echo's characters back to
+# clients.
+# This is the tcp version.
+service secdrop
+{
+        port            = 1337
+        user            = secdrop
+        socket_type     = stream
+        protocol        = tcp
+        type            = UNLISTED
+        wait            = no
+        instances       = 1
+        server          = /home/secdrop/SecDrop 
+        server_args     = /home/secdrop/messages
+}
+

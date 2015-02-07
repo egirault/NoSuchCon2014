@@ -1,0 +1,17 @@
+# default: off
+# description: An xinetd internal service which echo's characters back to
+# clients.
+# This is the tcp version.
+service stpm
+{
+        port            = 2014
+        user            = stpm
+        socket_type     = stream
+        protocol        = tcp
+        type            = UNLISTED
+        wait            = no
+        instances       = 1
+        server          = /home/stpm/STPM
+        server_args     = /home/stpm/keyfile
+}
+
